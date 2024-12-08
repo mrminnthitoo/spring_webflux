@@ -1,18 +1,20 @@
 package com.minnthitoo.spring_webflux.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collation = "actors")
 public class Actor {
 
     @Id
-    private String id;
+    String id;
 
-    private String firstName;
+    String firstName;
 
-    private String lastName;
+    String lastName;
 
 }
