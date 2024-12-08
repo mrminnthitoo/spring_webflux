@@ -17,6 +17,6 @@ public class Review {
 
     private String review;
 
-    Integer rating;
+    private Integer rating;
 
 }
