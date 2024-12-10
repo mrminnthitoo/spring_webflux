@@ -13,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestMovieService {
@@ -26,6 +29,35 @@ public class TestMovieService {
                     log.info("Movies {}", movies);
                 });
         WaitUntail.wait(2000);
+    }
+
+    @Test
+    public void testGetMoviesByYearGt(){
+        this.movieService.getMoviesByYear(2010L)
+                .subscribe(movie->{
+                    log.info("Movie {}", movie);
+                });
+        WaitUntail.wait(2000);
+    }
+
+    @Test
+    public void testFindMovieByDirector(){
+        this.movieService.getMovieByDirector("Director One")
+                .collectList()
+                .subscribe(movie->{
+                    log.info("Movie {}", movie);
+                    assertNotNull(movie);
+                });
+        WaitUntail.wait(2000);
+    }
+
+    @Test
+    public void testGetMovieByYearGt(){
+        this.movieService.getMovieByYearGt(2010L)
+                .collectList()
+                .subscribe(movie->{
+                    assertTrue(movie.size() > 0);
+                });
     }
 
     @Test

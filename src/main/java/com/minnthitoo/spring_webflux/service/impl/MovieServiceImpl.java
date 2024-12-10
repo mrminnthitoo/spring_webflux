@@ -34,6 +34,24 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Flux<MovieDto> getMoviesByYear(Long year) {
+        return this.movieRepository.findByYear(year)
+                .map(this::entityToDto);
+    }
+
+    @Override
+    public Flux<MovieDto> getMovieByDirector(String director) {
+        return this.movieRepository.getMovieByDirector(director)
+                .map(this::entityToDto);
+    }
+
+    @Override
+    public Flux<MovieDto> getMovieByYearGt(Long year) {
+        return this.movieRepository.getMoviesByYearGt(year)
+                .map(this::entityToDto);
+    }
+
+    @Override
     public Mono<MovieDto> getMovieById(String movieId) {
         return this.movieRepository.findById(movieId)
                 .switchIfEmpty(Mono.error(new Exception("Movie ID " + movieId + " not found.")))

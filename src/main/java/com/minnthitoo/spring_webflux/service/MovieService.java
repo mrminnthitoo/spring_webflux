@@ -7,6 +7,9 @@ import reactor.core.publisher.Mono;
 public interface MovieService {
 
     Flux<MovieDto> getAllMovies();
+    Flux<MovieDto> getMoviesByYear(Long year);
+    Flux<MovieDto> getMovieByDirector(String director);
+    Flux<MovieDto> getMovieByYearGt(Long year);
     Mono<MovieDto> getMovieById(String movieId);
     Mono<MovieDto> saveMovie(MovieDto movieDto);
     Mono<MovieDto> updateMovieById(String movieId, MovieDto movieDto);
