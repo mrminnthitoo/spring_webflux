@@ -10,5 +10,6 @@ public interface MovieService {
     Mono<MovieDto> getMovieById(String movieId);
     Mono<MovieDto> saveMovie(MovieDto movieDto);
     Mono<MovieDto> updateMovieById(String movieId, MovieDto movieDto);
+    Mono<MovieDto> deleteMovieById (String movieId);
 
 }
