@@ -90,6 +90,21 @@ public class MovieServiceImpl implements MovieService {
                 });
     }
 
+    @Override
+    public Mono<MovieDto> assignActorToMovie(String movieId, String actorId) {
+        return this.movieRepository.findById(movieId)
+                .switchIfEmpty(Mono.error(new Exception("Movie id " + movieId + " not found.")))
+                .flatMap(movie->{
+                    return this.actorRepository.findById(actorId)
+                            .switchIfEmpty(Mono.error(new Exception("Actor id " + actorId + " not found.")))
+                            .flatMap(actor->{
+                                movie.getActors().add(actor);
+                                return this.movieRepository.save(movie);
+                            });
+                })
+                .map(this::entityToDto);
+    }
+
     private MovieDto entityToDto(Movie movie){
         MovieDto movieDto = modelMapper.map(movie, MovieDto.class);
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();

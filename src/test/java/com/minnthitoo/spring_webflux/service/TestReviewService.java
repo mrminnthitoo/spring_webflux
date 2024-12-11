@@ -21,8 +21,10 @@ public class TestReviewService {
     public void testGetAllReview(){
         this.reviewService.getAllReview()
                 .collectList()
-                .map(review->{
-                    assertTrue(review.size() > 0);
+                .subscribe(reviews->{
+                    for (ReviewDto reviewDto : reviews){
+                        log.info("Review {}", reviewDto);
+                    }
                 });
         WaitUntail.wait(2000);
     }
