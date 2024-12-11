@@ -21,7 +21,7 @@ public class TestActorService {
     public void testGetAllActors(){
         this.actorService.getAllActors()
                 .doOnNext(actor->{
-                    log.info("Actor {}", actor);
+                    System.out.println(actor);
                 })
                 .collectList()
                 .subscribe(data->{
@@ -74,7 +74,7 @@ public class TestActorService {
     public void testDeleteActorById(){
         this.actorService.deleteActorById("6753206ace6cdf479a81e542")
                 .subscribe(actor->{
-                    log.info("Deleted Actor {}", actor);
+                    System.out.println(actor);
                     assertNotNull(actor.getId());
                 });
         WaitUntail.wait(2000);

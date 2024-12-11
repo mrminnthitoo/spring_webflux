@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieDto {
@@ -35,4 +34,67 @@ public class MovieDto {
 
     private List<ActorDto> actors;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public MovieDetailsDto getDetailsDto() {
+        return detailsDto;
+    }
+
+    public void setDetailsDto(MovieDetailsDto detailsDto) {
+        this.detailsDto = detailsDto;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public List<ActorDto> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<ActorDto> actors) {
+        this.actors = actors;
+    }
 }

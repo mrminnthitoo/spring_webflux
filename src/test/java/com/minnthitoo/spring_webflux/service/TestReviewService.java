@@ -23,7 +23,7 @@ public class TestReviewService {
                 .collectList()
                 .subscribe(reviews->{
                     for (ReviewDto reviewDto : reviews){
-                        log.info("Review {}", reviewDto);
+//                        log.info("Review {}", reviewDto);
                     }
                 });
         WaitUntail.wait(2000);
@@ -35,7 +35,7 @@ public class TestReviewService {
                 .collectList()
                 .subscribe(reviews->{
                     for (ReviewDto reviewDto : reviews){
-                        log.info("Review {}", reviewDto);
+//                        log.info("Review {}", reviewDto);
                     }
                 });
         WaitUntail.wait(2000);

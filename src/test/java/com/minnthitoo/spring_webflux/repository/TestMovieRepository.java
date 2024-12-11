@@ -58,10 +58,10 @@ public class TestMovieRepository {
                     return this.movieRepository.save(movie);
                 })
                 .subscribe(savedMovie->{
-                    log.info("Saved Movie {}", savedMovie);
+                    System.out.println("Saved Movie " + savedMovie);
                     assertEquals(2, savedMovie.getActors().size());
                 }, error->{
-                    log.error("Error {}", error.getMessage());
+                    System.out.println(error.getMessage());
                 });
 
 

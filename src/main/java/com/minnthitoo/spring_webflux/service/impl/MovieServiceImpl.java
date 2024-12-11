@@ -117,7 +117,7 @@ public class MovieServiceImpl implements MovieService {
                 .flatMap(Flux::collectList)
                 .map(MovieServiceImpl::getMovieDoublePair)
                 .filter(pair -> pair.getSecond() >= averageRating)
-                .map(pair -> pair.getFirst())
+                .map(Pair::getFirst)
                 .map(this::entityToDto);
     }
 

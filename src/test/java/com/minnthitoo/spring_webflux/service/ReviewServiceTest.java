@@ -38,7 +38,7 @@ public class ReviewServiceTest {
                 })
                 .filter(pair -> pair.getSecond() > 4)
                 .subscribe(pair->{
-                    log.info("Movie " + pair.getFirst().getName() + " Review " + pair.getSecond());
+                    System.out.println(pair.getFirst());
                 });
         WaitUntail.wait(2000);
     }

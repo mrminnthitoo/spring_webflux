@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
+@Rollback(value = false)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestMovieService {
 
@@ -26,7 +28,7 @@ public class TestMovieService {
     public void testGetAllMovies(){
         this.movieService.getAllMovies()
                 .subscribe(movies->{
-                    log.info("Movies {}", movies);
+//                    log.info("Movies {}", movies);
                 });
         WaitUntail.wait(2000);
     }
@@ -35,7 +37,7 @@ public class TestMovieService {
     public void testGetMoviesByYearGt(){
         this.movieService.getMoviesByYear(2010L)
                 .subscribe(movie->{
-                    log.info("Movie {}", movie);
+//                    log.info("Movie {}", movie);
                 });
         WaitUntail.wait(2000);
     }
@@ -45,7 +47,7 @@ public class TestMovieService {
         this.movieService.getMovieByDirector("Director One")
                 .collectList()
                 .subscribe(movie->{
-                    log.info("Movie {}", movie);
+//                    log.info("Movie {}", movie);
                     assertNotNull(movie);
                 });
         WaitUntail.wait(2000);
@@ -65,9 +67,9 @@ public class TestMovieService {
         String id = "6753206ace6cdf479a81e542";
         this.movieService.getMovieById(id)
                 .subscribe(movieDto -> {
-                    log.info("Movie {}", movieDto);
+//                    log.info("Movie {}", movieDto);
                 }, error -> {
-                    log.info("Error {}", error.getMessage());
+//                    log.info("Error {}", error.getMessage());
                 });
     }
 
@@ -92,7 +94,10 @@ public class TestMovieService {
 
         this.movieService.saveMovie(movieDto)
                 .subscribe(result->{
-                    log.info("Movie {}", result);
+//                    log.info("Movie {}", result);
+                    System.out.println("Saved Movie " + result);
+                }, error->{
+                    System.out.println("Error " + error.getMessage());
                 });
 
     }
@@ -117,7 +122,7 @@ public class TestMovieService {
 
         this.movieService.updateMovieById("6753206ace6cdf479a81e542", movieDto)
                 .subscribe(result->{
-                    log.info("Updated Movie {}", result);
+//                    log.info("Updated Movie {}", result);
                 });
     }
 

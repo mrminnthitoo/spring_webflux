@@ -36,7 +36,7 @@ public class TestReviewRepository {
                     return this.reviewRepository.save(review);
                 })
                 .subscribe(savedReview->{
-                    log.info("Review {}", savedReview);
+                    System.out.println(savedReview.toString());
                     assertEquals(5, savedReview.getRating());
                 });
 
