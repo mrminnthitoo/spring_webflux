@@ -3,15 +3,18 @@ package com.minnthitoo.spring_webflux.service.impl;
 import com.minnthitoo.spring_webflux.model.Actor;
 import com.minnthitoo.spring_webflux.model.Movie;
 import com.minnthitoo.spring_webflux.model.MovieDetails;
+import com.minnthitoo.spring_webflux.model.Review;
 import com.minnthitoo.spring_webflux.model.dto.ActorDto;
 import com.minnthitoo.spring_webflux.model.dto.MovieDetailsDto;
 import com.minnthitoo.spring_webflux.model.dto.MovieDto;
 import com.minnthitoo.spring_webflux.repository.ActorRepository;
 import com.minnthitoo.spring_webflux.repository.MovieRepository;
+import com.minnthitoo.spring_webflux.repository.ReviewRepository;
 import com.minnthitoo.spring_webflux.service.MovieService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,6 +28,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired private MovieRepository movieRepository;
     @Autowired private ActorRepository actorRepository;
+    @Autowired private ReviewRepository reviewRepository;
 
 
     @Override
@@ -103,6 +107,27 @@ public class MovieServiceImpl implements MovieService {
                             });
                 })
                 .map(this::entityToDto);
+    }
+
+    @Override
+    public Flux<MovieDto> getMovieWithAverageRatingGTE(int averageRating) {
+        return this.reviewRepository
+                .findAll()
+                .groupBy(review -> review.getMovie().getId())
+                .flatMap(Flux::collectList)
+                .map(MovieServiceImpl::getMovieDoublePair)
+                .filter(pair -> pair.getSecond() >= averageRating)
+                .map(pair -> pair.getFirst())
+                .map(this::entityToDto);
+    }
+
+    private static Pair<Movie, Double> getMovieDoublePair(List<Review> reviews) {
+        double sum = 0;
+        for(Review review : reviews){
+            sum += review.getRating();
+        }
+        Double average = sum / reviews.size();
+        return Pair.of(reviews.get(0).getMovie(), average);
     }
 
     private MovieDto entityToDto(Movie movie){
