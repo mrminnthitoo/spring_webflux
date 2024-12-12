@@ -6,7 +6,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value = "movie_details")
+@Document
 public class MovieDetails {
 
     @Id

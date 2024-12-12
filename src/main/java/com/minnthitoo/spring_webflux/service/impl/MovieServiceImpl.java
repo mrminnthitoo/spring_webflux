@@ -68,6 +68,7 @@ public class MovieServiceImpl implements MovieService {
         return this.actorRepository.saveAll(movie.getActors())
                 .collectList()
                 .flatMap(actors -> {
+                    System.out.println("actors saved");
                     movie.setActors(actors);
                     return this.movieRepository.save(movie);
                 })

@@ -12,9 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Document(collation = "movies")
+@Document
 public class Movie {
 
     @Id
@@ -39,7 +37,6 @@ public class Movie {
     private List<String> genres;
 
     // Embedded Model
-    @DBRef
     private MovieDetails details;
 
     public String getId() {

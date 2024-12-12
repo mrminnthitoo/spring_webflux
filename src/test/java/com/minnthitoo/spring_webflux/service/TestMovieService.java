@@ -76,18 +76,18 @@ public class TestMovieService {
     @Test
     public void testSaveMovie(){
         MovieDto movieDto = new MovieDto();
-        movieDto.setName("Movie Seven");
+        movieDto.setName("Movie One");
 
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
-        movieDetailsDto.setDetails("Movie Seven Details");
+        movieDetailsDto.setDetails("Movie One Details");
         movieDto.setDetailsDto(movieDetailsDto);
 
-        movieDto.setDirector("Movie Seven Director");
+        movieDto.setDirector("Movie One Director");
 
         List<ActorDto> actorDtos = new ArrayList<>();
         ActorDto actorDto = new ActorDto();
         actorDto.setFirstName("Actor");
-        actorDto.setLastName("7");
+        actorDto.setLastName("1");
         actorDtos.add(actorDto);
 
         movieDto.setActors(actorDtos);

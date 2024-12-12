@@ -1,5 +1,6 @@
 package com.minnthitoo.spring_webflux.repository;
 
+import com.minnthitoo.spring_webflux.WaitUntail;
 import com.minnthitoo.spring_webflux.model.Actor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -19,18 +20,24 @@ public class TestActor {
     public void testInsertActor(){
         Actor actor = new Actor();
         actor.setFirstName("Actor");
-        actor.setLastName("Six");
+        actor.setLastName("Three");
 
         this.actorRepository.save(actor)
                 .flatMap(savedActor->this.actorRepository.findById(savedActor.getId()))
                 .subscribe(result->{
-                    System.out.println(result.getId());
+                    System.out.println("Actor " + result.toString());
                 });
-        try {
-            Thread.sleep(4000);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        WaitUntail.wait(2000);
+    }
+
+    @Test
+    public void testGetActorById(){
+        String leonardoId = "675a467326d49c44a98c0d62";
+        this.actorRepository.findById(leonardoId)
+                .subscribe(actor->{
+                    System.out.println("Actor " + actor);
+                });
+        WaitUntail.wait(2000);
     }
 
 }

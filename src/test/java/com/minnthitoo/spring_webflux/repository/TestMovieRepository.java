@@ -30,8 +30,8 @@ public class TestMovieRepository {
     public void insertMovie(){
 
         //Titanic
-        String leonadoId = "6753206ace6cdf479a81e542";
-        String kateId = "675320f2acc11962aab60f1a";
+        String leonadoId = "675a467326d49c44a98c0d62";
+        String kateId = "675a46be9394bd270650f4f4";
 
         List<String> ids = new ArrayList<>();
         ids.add(leonadoId);
@@ -61,7 +61,7 @@ public class TestMovieRepository {
                     System.out.println("Saved Movie " + savedMovie);
                     assertEquals(2, savedMovie.getActors().size());
                 }, error->{
-                    System.out.println(error.getMessage());
+                    System.out.println("Error " + error.getMessage());
                 });
 
 
