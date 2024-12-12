@@ -48,7 +48,7 @@ public class TestActorService {
         ActorDto actorDto = new ActorDto();
 
         actorDto.setFirstName("Actor");
-        actorDto.setLastName("Nine");
+        actorDto.setLastName("Four");
 
         this.actorService.saveActor(actorDto)
                 .subscribe(data->{
@@ -62,9 +62,9 @@ public class TestActorService {
     public void testUpdateActorById(){
         ActorDto actorDto = new ActorDto();
         actorDto.setFirstName("Actor");
-        actorDto.setLastName("Update");
+        actorDto.setLastName("Three");
 
-        this.actorService.updateActorById("6753206ace6cdf479a81e542", actorDto)
+        this.actorService.updateActorById("675a5dad176bf82648a08889", actorDto)
                 .subscribe(actor->{
                     System.out.println("Actor " + actor);
                 });
@@ -72,7 +72,7 @@ public class TestActorService {
 
     @Test
     public void testDeleteActorById(){
-        this.actorService.deleteActorById("6753206ace6cdf479a81e542")
+        this.actorService.deleteActorById("675a5dad176bf82648a08889")
                 .subscribe(actor->{
                     System.out.println(actor);
                     assertNotNull(actor.getId());

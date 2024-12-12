@@ -24,20 +24,20 @@ public class TestReviewRepository {
     @Test
     public void insertReview(){
 
-        String movieId = "675a5760a93c4f21fba877b6";
+        String movieId = "675a9c9554aab164b6558929";
 
         this.movieRepository.findById(movieId)
                 .flatMap(movie -> {
                     Review review = new Review();
 
                     review.setMovie(movie);
-                    review.setRating(5);
-                    review.setReview("Best Movie");
+                    review.setRating(2);
+                    review.setReview("Not Bad");
                     return this.reviewRepository.save(review);
                 })
                 .subscribe(savedReview->{
                     System.out.println(savedReview.toString());
-                    assertEquals(5, savedReview.getRating());
+                    assertEquals(2, savedReview.getRating());
                 });
 
         WaitUntail.wait(2000);

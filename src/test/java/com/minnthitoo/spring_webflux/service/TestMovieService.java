@@ -48,10 +48,13 @@ public class TestMovieService {
 
     @Test
     public void testFindMovieByDirector(){
-        this.movieService.getMovieByDirector("Director One")
+        this.movieService.getMovieByDirector("Inception Director")
                 .collectList()
                 .subscribe(movie->{
 //                    log.info("Movie {}", movie);
+                    for (MovieDto m: movie){
+                        System.out.println("Movie " + m);
+                    }
                     assertNotNull(movie);
                 });
         WaitUntail.wait(2000);
@@ -62,8 +65,12 @@ public class TestMovieService {
         this.movieService.getMovieByYearGt(2010L)
                 .collectList()
                 .subscribe(movie->{
+                    for (MovieDto m : movie){
+                        System.out.println("Movie " + m.toString());
+                    }
                     assertTrue(movie.size() > 0);
                 });
+        WaitUntail.wait(2000);
     }
 
     @Test
@@ -82,18 +89,20 @@ public class TestMovieService {
     @Test
     public void testSaveMovie(){
         MovieDto movieDto = new MovieDto();
-        movieDto.setName("Movie Two");
+        movieDto.setName("Inception");
+
+        movieDto.setYear(2015);
 
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
-        movieDetailsDto.setDetails("Movie Two Details");
+        movieDetailsDto.setDetails("Inception Details");
         movieDto.setDetailsDto(movieDetailsDto);
 
-        movieDto.setDirector("Movie Two Director");
+        movieDto.setDirector("Inception Director");
 
         List<ActorDto> actorDtos = new ArrayList<>();
         ActorDto actorDto = new ActorDto();
-        actorDto.setFirstName("Actor");
-        actorDto.setLastName("2");
+        actorDto.setFirstName("Inception");
+        actorDto.setLastName("Actor");
         actorDtos.add(actorDto);
 
         movieDto.setActors(actorDtos);
@@ -130,6 +139,18 @@ public class TestMovieService {
                 .subscribe(result->{
 //                    log.info("Updated Movie {}", result);
                     System.out.println("Updated");
+                });
+        WaitUntail.wait(2000);
+    }
+
+    @Test
+    public void testGetMovieWithAverageRatingGTE(){
+        this.movieService.getMovieWithAverageRatingGTE(4)
+                .collectList()
+                .subscribe(movies->{
+                    for (MovieDto movie : movies){
+                        System.out.println("Movie " + movie.toString());
+                    }
                 });
         WaitUntail.wait(2000);
     }
