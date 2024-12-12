@@ -133,10 +133,10 @@ public class MovieServiceImpl implements MovieService {
 
     private MovieDto entityToDto(Movie movie){
         MovieDto movieDto = modelMapper.map(movie, MovieDto.class);
-        MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
+        MovieDetailsDto movieDetailsDto = modelMapper.map(movie.getDetails(), MovieDetailsDto.class);
         movieDto.setDetailsDto(movieDetailsDto);
 
-        List<ActorDto> actorDtos = modelMapper.map(movie.getActors(), new TypeToken<List<MovieDto>>(){}.getType());
+        List<ActorDto> actorDtos = modelMapper.map(movie.getActors(), new TypeToken<List<ActorDto>>(){}.getType());
         movieDto.setActors(actorDtos);
         return movieDto;
     }
@@ -146,7 +146,9 @@ public class MovieServiceImpl implements MovieService {
 
         MovieDetails movieDetails = this.modelMapper.map(movieDto.getDetailsDto(), MovieDetails.class);
 
-        if (!movieDto.getActors().isEmpty()){
+        movie.setDetails(movieDetails);
+
+        if (movieDto.getActors() != null){
             List<Actor> actors = this.modelMapper.map(movieDto.getActors(), new TypeToken<List<Actor>>(){}.getType());
             movie.setActors(actors);
         }

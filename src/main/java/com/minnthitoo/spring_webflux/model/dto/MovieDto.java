@@ -97,4 +97,18 @@ public class MovieDto {
     public void setActors(List<ActorDto> actors) {
         this.actors = actors;
     }
+
+    @Override
+    public String toString() {
+        return "MovieDto{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                ", director='" + director + '\'' +
+                ", createdAt=" + createdAt +
+                ", detailsDto=" + detailsDto +
+                ", genres=" + genres +
+                ", actors=" + actors +
+                '}';
+    }
 }

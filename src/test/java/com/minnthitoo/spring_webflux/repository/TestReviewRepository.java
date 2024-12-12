@@ -24,7 +24,7 @@ public class TestReviewRepository {
     @Test
     public void insertReview(){
 
-        String movieId = "6755b20dc8188e01c5130f4d";
+        String movieId = "675a5760a93c4f21fba877b6";
 
         this.movieRepository.findById(movieId)
                 .flatMap(movie -> {
@@ -32,7 +32,7 @@ public class TestReviewRepository {
 
                     review.setMovie(movie);
                     review.setRating(5);
-                    review.setReview("Good Movie");
+                    review.setReview("Best Movie");
                     return this.reviewRepository.save(review);
                 })
                 .subscribe(savedReview->{

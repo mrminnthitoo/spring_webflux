@@ -27,8 +27,12 @@ public class TestMovieService {
     @Test
     public void testGetAllMovies(){
         this.movieService.getAllMovies()
+                .collectList()
                 .subscribe(movies->{
 //                    log.info("Movies {}", movies);
+                    for (MovieDto movie : movies){
+                        System.out.println("Movie " + movie);
+                    }
                 });
         WaitUntail.wait(2000);
     }
@@ -64,30 +68,32 @@ public class TestMovieService {
 
     @Test
     public void testGetMovieById(){
-        String id = "6753206ace6cdf479a81e542";
+        String id = "675a5760a93c4f21fba877b6";
         this.movieService.getMovieById(id)
                 .subscribe(movieDto -> {
 //                    log.info("Movie {}", movieDto);
+                    System.out.println("Movie " + movieDto);
                 }, error -> {
 //                    log.info("Error {}", error.getMessage());
                 });
+        WaitUntail.wait(2000);
     }
 
     @Test
     public void testSaveMovie(){
         MovieDto movieDto = new MovieDto();
-        movieDto.setName("Movie One");
+        movieDto.setName("Movie Two");
 
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
-        movieDetailsDto.setDetails("Movie One Details");
+        movieDetailsDto.setDetails("Movie Two Details");
         movieDto.setDetailsDto(movieDetailsDto);
 
-        movieDto.setDirector("Movie One Director");
+        movieDto.setDirector("Movie Two Director");
 
         List<ActorDto> actorDtos = new ArrayList<>();
         ActorDto actorDto = new ActorDto();
         actorDto.setFirstName("Actor");
-        actorDto.setLastName("1");
+        actorDto.setLastName("2");
         actorDtos.add(actorDto);
 
         movieDto.setActors(actorDtos);
@@ -105,10 +111,10 @@ public class TestMovieService {
     @Test
     public void testUpdateMovieById(){
         MovieDto movieDto = new MovieDto();
-        movieDto.setName("Movie Seven Updated");
+        movieDto.setName("Movie Two Updated");
 
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
-        movieDetailsDto.setDetails("Movie Seven Details Updated.");
+        movieDetailsDto.setDetails("Movie Two Details Updated.");
 
         movieDto.setDetailsDto(movieDetailsDto);
 
@@ -120,10 +126,12 @@ public class TestMovieService {
 
         movieDto.setActors(actorDtos);
 
-        this.movieService.updateMovieById("6753206ace6cdf479a81e542", movieDto)
+        this.movieService.updateMovieById("675a5bc0f3be662c38c93854", movieDto)
                 .subscribe(result->{
 //                    log.info("Updated Movie {}", result);
+                    System.out.println("Updated");
                 });
+        WaitUntail.wait(2000);
     }
 
 }
