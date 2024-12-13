@@ -1,7 +1,6 @@
 package com.minnthitoo.spring_webflux.service;
 
 import com.minnthitoo.spring_webflux.WaitUntail;
-import com.minnthitoo.spring_webflux.model.MovieDetails;
 import com.minnthitoo.spring_webflux.model.dto.ActorDto;
 import com.minnthitoo.spring_webflux.model.dto.MovieDetailsDto;
 import com.minnthitoo.spring_webflux.model.dto.MovieDto;
@@ -95,7 +94,7 @@ public class TestMovieService {
 
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
         movieDetailsDto.setDetails("Inception Details");
-        movieDto.setDetailsDto(movieDetailsDto);
+        movieDto.setMovieDetails(movieDetailsDto);
 
         movieDto.setDirector("Inception Director");
 
@@ -125,7 +124,7 @@ public class TestMovieService {
         MovieDetailsDto movieDetailsDto = new MovieDetailsDto();
         movieDetailsDto.setDetails("Movie Two Details Updated.");
 
-        movieDto.setDetailsDto(movieDetailsDto);
+        movieDto.setMovieDetails(movieDetailsDto);
 
         List<ActorDto> actorDtos = new ArrayList<>();
         ActorDto actorDto = new ActorDto();

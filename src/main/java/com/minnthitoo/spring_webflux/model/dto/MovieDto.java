@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -28,7 +27,7 @@ public class MovieDto {
 
     private Date createdAt;
 
-    private MovieDetailsDto detailsDto;
+    private MovieDetailsDto movieDetails;
 
     private List<String> genres;
 
@@ -74,12 +73,12 @@ public class MovieDto {
         this.createdAt = createdAt;
     }
 
-    public MovieDetailsDto getDetailsDto() {
-        return detailsDto;
+    public MovieDetailsDto getMovieDetails() {
+        return movieDetails;
     }
 
-    public void setDetailsDto(MovieDetailsDto detailsDto) {
-        this.detailsDto = detailsDto;
+    public void setMovieDetails(MovieDetailsDto movieDetails) {
+        this.movieDetails = movieDetails;
     }
 
     public List<String> getGenres() {
@@ -106,7 +105,7 @@ public class MovieDto {
                 ", year=" + year +
                 ", director='" + director + '\'' +
                 ", createdAt=" + createdAt +
-                ", detailsDto=" + detailsDto +
+                ", detailsDto=" + movieDetails +
                 ", genres=" + genres +
                 ", actors=" + actors +
                 '}';

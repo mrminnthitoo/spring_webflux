@@ -89,10 +89,8 @@ public class MovieServiceImpl implements MovieService {
     public Mono<MovieDto> deleteMovieById(String movieId) {
         return this.movieRepository.findById(movieId)
                 .switchIfEmpty(Mono.error(new Exception("Movie id " + movieId + " not found.")))
-                .flatMap(movie -> {
-                    return this.movieRepository.deleteById(movieId)
-                            .thenReturn(this.entityToDto(movie));
-                });
+                .flatMap(movie -> this.movieRepository.deleteById(movieId)
+                        .thenReturn(this.entityToDto(movie)));
     }
 
     @Override
@@ -134,7 +132,7 @@ public class MovieServiceImpl implements MovieService {
     private MovieDto entityToDto(Movie movie){
         MovieDto movieDto = modelMapper.map(movie, MovieDto.class);
         MovieDetailsDto movieDetailsDto = modelMapper.map(movie.getDetails(), MovieDetailsDto.class);
-        movieDto.setDetailsDto(movieDetailsDto);
+        movieDto.setMovieDetails(movieDetailsDto);
 
         List<ActorDto> actorDtos = modelMapper.map(movie.getActors(), new TypeToken<List<ActorDto>>(){}.getType());
         movieDto.setActors(actorDtos);
@@ -144,7 +142,7 @@ public class MovieServiceImpl implements MovieService {
     private Movie dtoToEntity(MovieDto movieDto){
         Movie movie = this.modelMapper.map(movieDto, Movie.class);
 
-        MovieDetails movieDetails = this.modelMapper.map(movieDto.getDetailsDto(), MovieDetails.class);
+        MovieDetails movieDetails = this.modelMapper.map(movieDto.getMovieDetails(), MovieDetails.class);
 
         movie.setDetails(movieDetails);
 
